@@ -1,17 +1,16 @@
 import express from 'express';
 import { UserController } from '../controllers/user.controller';
-import { isAuthenticated } from '../../utilities/utilities';
-
+import { isAuthenticated } from '../../utilities/isAuthenticated';
 const router = express.Router();
 
 const userController = new UserController();
 
-router.post('/user', userController.create);
+router.post('/', userController.create);
 router.post('/auth', userController.login);
 
-router.put('/user', isAuthenticated, userController.updateByToken); // 📛📛 Ainda não está pronta, devo terminar. 📛📛
-router.get('/user', isAuthenticated, userController.findOneByEmail);
-router.get('/user/:id', isAuthenticated, userController.findOneById);
-router.delete('/user/:id', isAuthenticated, userController.deleteById);
+router.put('/', isAuthenticated, userController.updateByToken);
+router.get('/', isAuthenticated, userController.findOneByEmail);
+router.get('/:id', isAuthenticated, userController.findOneById);
+router.delete('/:id', isAuthenticated, userController.deleteById);
 
 export default router;

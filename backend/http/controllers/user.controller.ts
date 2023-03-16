@@ -1,5 +1,7 @@
+import { User } from "@prisma/client";
 import { Request, Response } from "express";
-import { createJWT, getUserByToken } from "../../utilities/utilities";
+import { createJWT } from "../../utilities/createJWT";
+import { getUserByToken } from "../../utilities/getUserByToken";
 import { ILogin, IUser, UserServices } from "../services/user.services";
 
 const userServices = new UserServices();
@@ -23,7 +25,7 @@ export class UserController {
 
     public async create(req: Request, res: Response) {
         const { email, password, name }: IUser = req.body;
-        const user = await userServices.create({ email, name, password});
+        const user = await userServices.create({ email, name, password });
 
         if (!user) return res.status(422).json({
             message: "Name, email and password is required."
@@ -68,9 +70,11 @@ export class UserController {
         const token = req.headers.authorization!.split("Bearer ")[1];
         const user = getUserByToken(token);
 
-        console.log(user)
+        const { name, email, password } = req.body as IUser;
 
-        return res.json(user)
+        const updatedUser = await userServices.update({ id: Number(user.sub), name, email, password });
+
+        return res.json(updatedUser);
     }
 
 

@@ -11,14 +11,35 @@ datasource db {
 }
 
 model User {
-  id       Int    @id() @default(autoincrement())
-  name     String
-  email    String
-  password String
+  id        Int      @id() @default(autoincrement())
+  name      String
+  email     String
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Property {
-  id             Int  @id() @default(autoincrement())
-  sale_price     Int
-  purchase_price Int?
+  id               Int             @id() @default(autoincrement())
+  register         Int             @unique
+  salePrice        Int
+  purchasePrice    Int?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+  propertyStatus   PropertyStatus  @relation(fields: [propertyStatusId], references: [id])
+  propertyStatusId Int             @default(2)
+  PropertyImage    PropertyImage[]
+}
+
+model PropertyStatus {
+  id          Int        @id() @default(autoincrement())
+  description String
+  Property    Property[]
+}
+
+model PropertyImage {
+  id         Int      @id() @default(autoincrement())
+  name       String   @unique
+  Property   Property @relation(fields: [propertyId], references: [id])
+  propertyId Int
 }

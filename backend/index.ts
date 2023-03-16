@@ -1,9 +1,8 @@
-import express from 'express';
-import cors from 'cors';
-import userRouter from './http/routes/user.routes';
-import propertiesRouter from './http/routes/properties.routes';
 import { errors } from 'celebrate';
-
+import cors from 'cors';
+import express from 'express';
+import propertiesRouter from './http/routes/property.routes';
+import userRouter from './http/routes/user.routes';
 
 const app = express();
 
@@ -16,8 +15,10 @@ app.get('/', (req, res) => {
     })
 })
 
-app.use(userRouter);
-app.use(propertiesRouter);
+app.use('/uploads', express.static('uploads'));
+
+app.use('/user', userRouter);
+app.use('/property', propertiesRouter);
 
 
 app.use(errors());
