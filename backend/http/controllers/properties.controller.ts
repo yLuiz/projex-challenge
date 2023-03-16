@@ -1,12 +1,15 @@
-import { PrismaClient } from "@prisma/client";
+import { Request, Response } from "express";
+import { PropertiesServices } from "../services/properties.services";
 
-const prisma = new PrismaClient();
+const propertiesServices = new PropertiesServices();
 
 export class PropertiesController {
     constructor() {}
 
-    public async findMany() {
-        const properties = await prisma
+    public async findMany(req: Request, res: Response) {
+        const properties = propertiesServices.findMany();
+
+        return res.json({ properties });
     }
 
     public async findById(id: number) {}

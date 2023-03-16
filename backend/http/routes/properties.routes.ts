@@ -1,9 +1,10 @@
 import express from 'express';
+import { PropertiesController } from '../controllers/properties.controller';
 
 const router = express.Router();
 
-router.get('/properties', (req, res) => {
-    return res.json({ message: "Properties Route!"})
-});
+const propertiesController = new PropertiesController();
+
+router.get('/properties', propertiesController.findMany);
 
 export default router;
