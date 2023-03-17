@@ -1,4 +1,6 @@
 import { PrismaClient } from "@prisma/client";
+import fs from 'node:fs';
+import path from 'node:path';
 
 const prisma = new PrismaClient();
 
@@ -40,7 +42,22 @@ export class PropertyServices {
         return property;
     }
 
+    public async findByRegister(register: number) {
+        const property = await prisma.property.findFirst({
+            where: {
+                register
+            },
+            include: {
+                PropertyImage: true,
+                propertyStatus: true
+            }
+        });
+
+        return property;
+    }
+
     public async create({salePrice, register, purchasePrice,  propertyImages }: IProperty) {
+
         const property = await prisma.property.create({
             data: {
                 salePrice, 
@@ -61,11 +78,70 @@ export class PropertyServices {
         };
         
 
-        const image = await this.findById(property.id);
-        return image?.PropertyImage;
+        const propertyImages_ = (await this.findById(property.id))?.PropertyImage;
+
+        let propertyResponse = {
+            ...property,
+            images: propertyImages_
+        }
+
+        return propertyResponse;
     }
 
-    public async update(id: number) {}
+    public async update({ id, salePrice, register, purchasePrice,  propertyImages }: IProperty) {
+
+        let property = await this.findById(Number(id));
+
+        let updatedProperty = await prisma.property.update({
+            where: {
+                id
+            },
+            data: {
+                salePrice,
+                register,
+                purchasePrice
+            },
+            include: {
+                PropertyImage: true
+            }
+        });
+
+        if (propertyImages.length) {
+
+            await prisma.propertyImage.deleteMany({
+                where: {
+                    propertyId: updatedProperty.id
+                }
+            });
+
+            property!.PropertyImage.map(propertyImage => {
+                const imagePath = path.resolve(__dirname, '..', '..', 'uploads', 'properties', `${propertyImage.name}`);
+                fs.unlink(imagePath, () => null);
+            });
+
+            propertyImages.forEach(async image => {
+                await prisma.propertyImage.create({
+                    data: {
+                        propertyId: updatedProperty.id,
+                        name: image.filename
+                    }
+                });
+            });
+
+            const propertyImagesSaved = await prisma.propertyImage.findMany({
+                where: {
+                    propertyId: updatedProperty.id
+                }
+            })
+
+            updatedProperty = {
+                ...updatedProperty,
+                PropertyImage: [...propertyImagesSaved]
+            }
+        }        
+
+        return updatedProperty;
+    }
 
 
     public async deleteById(id: number) {}

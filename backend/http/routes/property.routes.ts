@@ -8,6 +8,7 @@ const router = express.Router();
 const propertiesController = new PropertiesController();
 
 router.post('/', isAuthenticated, imageUpload.array('images'), propertiesController.create);
+router.put('/:id', isAuthenticated, imageUpload.array('images'), propertiesController.update);
 
 router.get('/', isAuthenticated, propertiesController.findMany);
 router.get('/:id', isAuthenticated, propertiesController.findById);

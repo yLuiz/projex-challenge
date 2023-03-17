@@ -40,3 +40,21 @@ Extras:
 
 Se faltou informação, algo não fez sentido ou está errado, tome a liberdade de aplicar a correção que julgar necessária e descreva o erro/solução no README.
 Técnicamente irei avaliar o projeto, outras pessoas vão avaliar como se fossem os corretores. Nos surpreenda.
+
+## Rotas Backend:
+	# User
+	`
+		Create 				 	[POST]		- /user
+		Authentication 	[POST]		- /user/auth
+		UpdateByToken  	[PUT]			- /user
+		GetByEmail		 	[GET]			- /user?email=
+		GetById 			 	[GET]			- /user/:id
+		DeleteById			[DELETE]  - /user/:id
+	`
+	# Property
+	`
+		Create 				 		[POST]		- /property
+		UpdateById				[PUT]			- /property/:id
+		GetAllProperties	[GET]			- /property
+		GetById 			 		[GET]			- /property/:id
+	`
