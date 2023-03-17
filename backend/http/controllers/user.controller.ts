@@ -41,21 +41,18 @@ export class UserController {
     }
 
     public async findOneByEmail(req: Request, res: Response) {
-        const { email } = req.body;
+        const { email } = req.query;
 
-        const user = await userServices.findByEmail(email);
+        const user = await userServices.findByEmail(String(email));
 
         if (!user) return res.status(404).json({
             message: "User not found!"
         })
 
-        return res.json({ user });
+        return res.json({ user: {...user, password: undefined } });
     }
 
     public async findOneById(req: Request, res: Response) {
-
-        console.log(req.headers.authorization);
-
         const { id } = req.params;
         const user = await userServices.findById(Number(id));
 
@@ -63,7 +60,7 @@ export class UserController {
             message: "User not found!"
         })
 
-        return res.json({ user });
+        return res.json({ user: {...user, password: undefined } });
     }
 
     public async updateByToken(req: Request, res: Response) {
