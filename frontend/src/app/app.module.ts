@@ -5,15 +5,17 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthInterceptor } from 'src/security/auth.interceptor';
+import { AuthInterceptor } from 'src/app/security/auth.interceptor';
 import { LoginComponent } from './components/login/login.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    UserFormComponent
+    UserFormComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,

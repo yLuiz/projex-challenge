@@ -1,7 +1,7 @@
 <section>
   <div class="login-container">
     <form (ngSubmit)="login($event)">
-      <h1>Bem vindo<br>Faça seu login</h1>
+      <h1>Bem vindo!<br>Faça seu login</h1>
       <div class="form-group">
         <input id="email" name="email" type="email" required>
         <label for="email">Email</label>
@@ -17,7 +17,7 @@
   
       <button type="submit">
         <span *ngIf="loadingLogin" class="loader"></span>
-        <span *ngIf="!loadingLogin">Enviar</span>
+        <span *ngIf="!loadingLogin">Entrar</span>
       </button>
     </form>
   </div>

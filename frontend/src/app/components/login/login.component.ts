@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (response => {
           if (response.token) {
+            localStorage.setItem('token', response.token);
             this.router.navigate(['/register']);
           }
           this.loadingLogin = false;

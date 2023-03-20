@@ -14,7 +14,8 @@
     "multer": "^1.4.5-lts.1"
   },
   "scripts": {
-    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules ./index.ts"
+    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules ./index.ts",
+    "build": "tsc --outDir build"
   },
   "devDependencies": {
     "@types/cors": "^2.8.13",

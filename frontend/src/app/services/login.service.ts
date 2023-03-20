@@ -17,7 +17,13 @@ export class LoginService {
   ) { }
 
   public getToken() {
-    return "token";
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      return null;
+    };
+
+    return JSON.parse(token);
   }
 
   public login({ email, password }: ILogin): Observable<{ token: string }> {
