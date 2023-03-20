@@ -1,6 +1,14 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
-type TypeDialog = "error" | "success";
+export type TypeDialog = "error" | "success";
+
+interface IDiologConfig {
+  header: string;
+  message: string;
+  type?: TypeDialog;
+  timer: number;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -8,31 +16,15 @@ type TypeDialog = "error" | "success";
 export class DialogService {
 
   public class = 'dialog-container';
-  private header_ = '';
-  private message_ = '';
+  public dialogConfig = new BehaviorSubject<IDiologConfig>({
+    header: '',
+    message: '',
+    type: "success",
+    timer: 0
+  });
   private visible_ = false;
   
   constructor() { }
-
-  setType (value: TypeDialog) {
-    this.class = `${this.class} ${value}`;
-  }
-
-  set header (value: string) {
-    this.header_ = value;
-  }
-
-  get header () {
-    return this.header_;
-  }
-
-  set message (value: string) {
-    this.message_ = value;
-  }
-
-  get message () {
-    return this.message_;
-  }
 
   set visible (value: boolean) {
     this.visible = value;
@@ -42,13 +34,37 @@ export class DialogService {
     return this.visible_
   }
 
-  public show() {
+  public show({ header, message, type, timer }: IDiologConfig) {
+
+    if (this.visible_) return;
+
+    type = type ?? "success";
+
+    this.dialogConfig.next({
+      header,
+      message,
+      type,
+      timer
+    })
+
     this.visible_ = true;
-    this.class = `${this.class} show`;
+
+    this.class = `dialog-container ${type} show`;
+
+    setTimeout(() => {
+      this.hide();
+    }, timer);
   }
 
   public hide() {
-    this.visible_ = false;
-    this.class = `${this.class} hide`;
+
+    this.class = this.class.replace('show', 'hide');
+    console.log(this.class)
+
+    setTimeout(() => {
+      this.visible_ = false;
+      this.class = "dialog-container";
+      console.log(this.class)
+    }, 300);
   }
 }

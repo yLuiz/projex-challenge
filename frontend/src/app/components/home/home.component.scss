@@ -1,0 +1,257 @@
+header {
+
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  height: 50px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+
+  .button-container {
+    display: flex;
+    align-items: center;
+
+    height: 50%;
+
+    margin-left: 20px;
+
+    cursor: pointer;
+  }
+
+  .button-container:hover {
+    .menu-button, .menu-button::after, .menu-button::before {
+      background-color: #4b4b4b;
+    }
+  }
+
+  .menu-button {
+
+    position: relative;
+
+    border: none;
+    background-color: #858585;
+    border-radius: 8px;
+    width: 25px;
+    height: 2px;
+
+    transition: all .2s ease-in-out;
+  }
+
+  .menu-button::after, .menu-button::before {
+    position: absolute;
+    left: 0px;
+    content: '';
+    width: 100%;
+    height: 2px;
+    background-color: #858585;
+
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+  }
+
+  .menu-button::after {
+    top: 6px;
+  }
+
+  .menu-button::before {
+    top: -6px;
+  }
+
+  .logout-container {
+
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+
+    .logout-button {
+
+      position: relative;
+
+      font-size: 1rem;
+      background-color: transparent;
+
+      margin-right: 40px;
+
+      border: none;
+
+      cursor: pointer;
+
+      i {
+        font-size: 1.3rem;
+      }
+
+      transition: all 2s ease-in-out;
+    }
+
+    .logout-button:hover::after {
+
+      content: 'Sair';
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      position: absolute;
+
+      text-align: center;
+
+      border-radius: 12px;
+      background-color: #4b4b4b;
+      color: #FFF;
+      font-size: 0.8rem;
+
+      bottom: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      width: 40px;
+      height: 20px;
+    }
+  }
+}
+
+nav {
+
+  position: absolute;
+  top: 0;
+
+  max-width: 250px;
+  width: 100%;
+
+  height: 100%;
+  
+  background-color: #FFF;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+
+  z-index: 4;
+
+  .button-container {
+
+    display: flex;
+    justify-content: flex-end;
+
+
+    width: 100%;
+    
+    button {
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  
+      margin: 15px 20px 0;
+  
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+  
+      font-size: 1.5rem;
+      color: #151515;
+      background-color: transparent;
+  
+      cursor: pointer;
+      transition: all .2s ease-in-out;
+    }
+  
+    button:hover {
+  
+      background-color: #ff2828;
+      color: #FFF;
+  
+    }
+  }
+
+  .actions-list {
+    ul {
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      gap: 10px;
+
+      width: 100%;
+      
+
+      list-style: none;
+      
+      li {
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 40px;
+
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+        a {
+
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+
+          padding-left: 40px;
+
+          width: 100%;
+          height: 100%;
+
+          font-weight: 600;
+          color: #0077ff;
+
+          text-decoration: none;
+
+          i {
+            font-size: 1.2rem;
+            margin-right: 10px;
+          }
+        }
+      }
+
+      li, li a {
+        transition: all .2s ease-in-out;
+      }
+
+      li:hover a{
+        color: #FFF;
+      }
+
+      li:hover {
+        background-color: #0077ff;
+      }
+
+    }
+
+
+  }
+}
+
+nav.show {
+  animation: show 1s forwards;
+}
+
+nav.hide {
+  animation: hide 1s forwards;
+}
+
+@keyframes show {
+  0% {
+    transform: translateX(-120%);
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes hide {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-120%);
+  }
+}

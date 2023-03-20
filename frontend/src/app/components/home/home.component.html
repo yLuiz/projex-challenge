@@ -1,0 +1,41 @@
+<main>
+  <header>
+    <div (click)="openMenu()" class="button-container">
+      <button class="menu-button"></button>
+    </div>
+    <div class="logout-container">
+      <button (click)="logout()" class="logout-button">
+        <i class="bi bi-power"></i>
+      </button>
+    </div>
+  </header>
+  <nav *ngIf="visible" class="{{menuService.class}}">
+    <div class="button-container">
+      <button (click)="closeMenu()">
+        <i class="bi bi-x"></i>
+      </button>
+    </div>
+  
+    <div class="actions-list">
+      <ul>
+        <li>
+          <a routerLink="/">
+            <i class="bi bi-person-fill-gear"></i>
+            Editar usuário
+          </a>
+        </li>
+        <li>
+          <a routerLink="/">
+            <i class="bi bi-house-add-fill"></i>
+            Cadastrar Imóvel
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
+  <section>
+    <router-outlet></router-outlet>
+  </section>
+
+</main>

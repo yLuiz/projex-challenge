@@ -7,16 +7,7 @@ import { DialogService } from './components/dialog/dialog.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor (
-    private dialogService: DialogService
-  ) {}
+  constructor () {}
 
-  ngOnInit() {
-    this.dialogService.header = "Error";
-    this.dialogService.message = "Invalid credentials.";
-    this.dialogService.setType('error');
-
-    setTimeout(() => {this.dialogService.show()}, 1000);
-
-  }
+  ngOnInit() {}
 }

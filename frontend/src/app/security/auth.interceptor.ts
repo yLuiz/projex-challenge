@@ -1,21 +1,30 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { Observable } from "rxjs";
-import { LoginService } from "../services/login.service";
+import { AuthService } from "../services/auth.service";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
   constructor(
-    private loginService: LoginService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    const myToken = this.loginService.getToken();
+    const myToken = this.authService.getToken();
 
     if (!myToken) {
-      throw new Error("Token not found.")
+      
+      const url = req.url.split('/');
+
+      if (url.includes('auth')) {
+        return next.handle(req);
+      }
+
+      this.router.navigate(['/login']);
     }
 
     const authRequest = req.clone({

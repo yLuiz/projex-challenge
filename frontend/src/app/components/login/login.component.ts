@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, Subscriber, Subscription } from 'rxjs';
-import { LoginService } from 'src/app/services/login.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { DialogService } from '../dialog/dialog.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,8 @@ import { LoginService } from 'src/app/services/login.service';
 export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(
-    private loginService: LoginService,
+    private authService: AuthService,
+    private dialogService: DialogService,
     private router: Router
   ) { }
 
@@ -30,17 +32,32 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loadingLogin = true;
     const password = form.getElementsByTagName('input').namedItem('password')!.value;
 
-    this.loginSubscribtion = this.loginService.login({ email, password })
+    this.loginSubscribtion = this.authService.login({ email, password })
       .subscribe({
         next: (response => {
           if (response.token) {
             localStorage.setItem('token', response.token);
-            this.router.navigate(['/register']);
+            
+            this.dialogService.show({
+              header: "Sucesso",
+              message: "Logado com sucesso",
+              timer: 1000
+            });
+
+            setTimeout(() => {
+              this.router.navigate(['/home']);
+            }, 1000);
           }
           this.loadingLogin = false;
         }),
         error: (response) => {
           this.loadingLogin = false;
+          this.dialogService.show({
+            header: "Erro",
+            message: "Credências inválidas.",
+            type: "error",
+            timer: 2000
+          });
           console.log(response.error.message);
         }
       })

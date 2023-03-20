@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 interface ILogin {
@@ -10,10 +11,11 @@ interface ILogin {
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class AuthService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
 
   public getToken() {
@@ -28,5 +30,10 @@ export class LoginService {
 
   public login({ email, password }: ILogin): Observable<{ token: string }> {
     return this.http.post<{ token: string }>('http://localhost:3000/user/auth', { email, password });
+  }
+
+  public logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 }
