@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
-import jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -16,26 +15,23 @@ export class AuthGuard implements CanActivate {
     const localToken = localStorage.getItem('token');
   
     const url = route.url[0].path;
-
-    if (!localToken && url !== "login") {
-      this.router.navigate(['/login']);
-      return false;
-    };
+    const loginOrRegister = url === "login" || url === "register";
     
-    if (url === "login" && !localToken) {
-      console.log(localToken);
+    if (loginOrRegister && !localToken) {
+      console.log(url);
       return true;
     }
 
-
-    if (url === "login" && localToken) {
+    if (loginOrRegister && localToken) {
+      console.log(url);
       this.router.navigate(['/home'])
       return false;
     }
 
-    const decodeToken = await jwt_decode(String(localToken));
-
-    // console.log(decodeToken);
+    if (!localToken && !loginOrRegister) {
+      this.router.navigate(['/login']);
+      return false;
+    };
 
     return true;
 

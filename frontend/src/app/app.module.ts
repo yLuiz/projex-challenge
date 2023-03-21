@@ -10,6 +10,8 @@ import { LoginComponent } from './components/login/login.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { HomeComponent } from './components/home/home.component';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
+import { UserRegisterComponent } from './components/user-register/user-register.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { HomeComponent } from './components/home/home.component';
     LoginComponent,
     UserFormComponent,
     DialogComponent,
-    HomeComponent
+    HomeComponent,
+    UserEditComponent,
+    UserRegisterComponent
   ],
   imports: [
     BrowserModule,

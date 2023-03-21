@@ -2,10 +2,20 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import jwt_decode from 'jwt-decode';
+import { environment } from 'src/environments/environment';
 
 interface ILogin {
   email: string;
   password: string;
+}
+
+export interface IDecodedToken {
+  email: string,
+  password: string,
+  sub: number, 
+  iat: number, 
+  exp: number
 }
 
 @Injectable({
@@ -25,11 +35,20 @@ export class AuthService {
       return null;
     };
 
-    return JSON.parse(token);
+    return token as string;
+  }
+
+  public async getDecodedToken() {
+    const token = this.getToken();
+
+    if (!token) return null;
+
+    const decodedToken = await jwt_decode(token);
+    return decodedToken as IDecodedToken;
   }
 
   public login({ email, password }: ILogin): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>('http://localhost:3000/user/auth', { email, password });
+    return this.http.post<{ token: string }>(`${environment.api_url}/user/auth`, { email, password });
   }
 
   public logout() {

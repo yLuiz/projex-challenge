@@ -170,6 +170,8 @@ nav {
       justify-content: center;
       flex-direction: column;
 
+      margin-top: 10px;
+
       gap: 10px;
 
       width: 100%;
@@ -229,14 +231,14 @@ nav {
 }
 
 nav.show {
-  animation: show 1s forwards;
+  animation: showNav .6s forwards;
 }
 
 nav.hide {
-  animation: hide 1s forwards;
+  animation: hideNav .6s forwards;
 }
 
-@keyframes show {
+@keyframes showNav {
   0% {
     transform: translateX(-120%);
   }
@@ -246,7 +248,7 @@ nav.hide {
   }
 }
 
-@keyframes hide {
+@keyframes hideNav {
   0% {
     transform: translateX(0%);
   }

@@ -1,7 +1,9 @@
 <div *ngIf="dialogService.visible" [class]="dialogService.class">
-    <div class="content">
-        <i *ngIf="(type === 'success')" class="bi bi-check-circle-fill"></i>
+    <div class="icon-type">
+        <i *ngIf="(type === 'success')" class="bi bi-check-circle"></i>
         <i *ngIf="(type === 'error')" class="bi bi-x-circle"></i>
+    </div>
+    <div class="content">
         <h1>{{ header }}</h1>
         <p>{{ message }}</p>
     </div>

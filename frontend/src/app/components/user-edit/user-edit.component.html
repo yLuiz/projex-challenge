@@ -1,0 +1,5 @@
+<app-user-form 
+  *ngIf="user" 
+  [user]="user"
+  (onSubmit)="editUser($event)"
+></app-user-form>

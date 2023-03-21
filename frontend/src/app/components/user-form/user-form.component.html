@@ -1,1 +1,44 @@
-<p>user-form works!</p>
+<section class="form-section">
+  <form (ngSubmit)="submit()" [formGroup]="userForm" #formDir="ngForm">
+    <div class="form-group">
+      <input [ngClass]="{'invalid': (name?.invalid && formDir.submitted) }" type="text" id="name" placeholder="Digite seu nome"formControlName="name" required>
+      <label for="name">Nome</label>
+      <span *ngIf="name!.errors?.['required'] && formDir.submitted">
+        Nome é obrigatório
+      </span>
+    </div>
+  
+    <div class="form-group">
+      <input [ngClass]="{'invalid': (email?.invalid && formDir.submitted) }" type="text" id="email" placeholder="Digite seu email"formControlName="email" required>
+      <label for="email">Email</label>
+      <span *ngIf="email!.errors?.['required'] && formDir.submitted">
+        E-mail é obrigatório
+      </span>
+      <span *ngIf="email!.errors?.['pattern']">
+        Escreva um e-mail válido
+      </span>
+    </div>
+  
+    <div class="form-group">
+      <input [ngClass]="{'invalid': (password?.invalid && formDir.submitted) }" type="password" id="password" placeholder="Digite sua senha"formControlName="password" required>
+      <label for="password">Senha</label>
+      <span *ngIf="password!.errors?.['required'] && formDir.submitted">
+        Senha é obrigatória
+      </span>
+    </div>
+
+    <div class="form-group">
+      <input [ngClass]="{'invalid': (confirmedPassword?.invalid && formDir.submitted) }" type="password" id="confirmedPassword" placeholder="Digite sua senha"formControlName="confirmedPassword" required>
+      <label for="confirmedPassword">Confirme a senha</label>
+      <span *ngIf="confirmedPassword!.errors?.['required'] && formDir.submitted">
+        Confirme a senha
+      </span>
+      <span *ngIf="password!.value !== confirmedPassword!.value && confirmedPassword!.value.length > 5">
+        As senhas não correspondem
+      </span>
+    </div>
+  
+    <input type="submit" value="{{buttonText}}">
+  
+  </form>
+</section>

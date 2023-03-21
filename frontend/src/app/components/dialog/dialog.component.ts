@@ -10,19 +10,29 @@ export class DialogComponent implements OnInit {
   header: string = '';
   message: string = '';
 
-  type: TypeDialog = "success";
+  type: TypeDialog | undefined = "success";
 
   constructor(
     public dialogService: DialogService
   ) {}
 
+  showTest() {
+    this.dialogService.show({ 
+      header: "Teste",
+      message: "Testando mensagem",
+      timer: 2000,
+      type: "error"
+    });
+  }
+
   ngOnInit(): void {
+    // this.showTest();
 
     this.dialogService.dialogConfig.subscribe({
       next: (values) => {
         this.header = values.header;
         this.message = values.message;
-        this.type = values.type || "success";
+        this.type = values.type;
       }
     });
   }

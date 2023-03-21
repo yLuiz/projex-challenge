@@ -59,12 +59,10 @@ export class DialogService {
   public hide() {
 
     this.class = this.class.replace('show', 'hide');
-    console.log(this.class)
 
     setTimeout(() => {
       this.visible_ = false;
       this.class = "dialog-container";
-      console.log(this.class)
     }, 300);
   }
 }

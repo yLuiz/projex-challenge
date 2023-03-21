@@ -32,6 +32,19 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loadingLogin = true;
     const password = form.getElementsByTagName('input').namedItem('password')!.value;
 
+    if (!email || !password) {
+
+      this.dialogService.show({
+        header: "Campos inválidos",
+        message: "Email e senha são obrigatórios",
+        timer: 3000,
+        type: "error"
+      });
+      
+      this.loadingLogin = false;
+      return;
+    }
+
     this.loginSubscribtion = this.authService.login({ email, password })
       .subscribe({
         next: (response => {
@@ -41,7 +54,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.dialogService.show({
               header: "Sucesso",
               message: "Logado com sucesso",
-              timer: 1000
+              timer: 2000
             });
 
             setTimeout(() => {
@@ -52,6 +65,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         }),
         error: (response) => {
           this.loadingLogin = false;
+
           this.dialogService.show({
             header: "Erro",
             message: "Credências inválidas.",
