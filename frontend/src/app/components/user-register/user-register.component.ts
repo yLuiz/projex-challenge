@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 import { IUserRequest } from 'src/interfaces/user.interface';
+import { DialogService } from '../dialog/dialog.service';
 
 @Component({
   selector: 'app-user-register',
@@ -8,13 +12,36 @@ import { IUserRequest } from 'src/interfaces/user.interface';
 })
 export class UserRegisterComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private userService: UserService,
+    private authService: AuthService,
+    private dialogService: DialogService,
+    private router: Router
+  ) { }
 
   registerUser(user: IUserRequest) {
-    console.log(user)
+    this.userService.register(user).subscribe({
+      next: (response) => {
+        this.authService.login({email: user.email, password: user.password })
+          .subscribe({
+            next: (response) => {
+              if (response.token) {
+                localStorage.setItem('token', response.token);
+    
+                setTimeout(() => {
+                  this.router.navigate(['/home']);
+                }, 1000);
+              }
+            }
+          });
+        
+      },
+      error: (response) => {
+        console.log(response.error.message);
+      }
+    });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }

@@ -6,6 +6,7 @@ const prisma = new PrismaClient();
 
 export interface IProperty {
     id?: number;
+    title:  string;
     register: number;         
     salePrice: number;        
     purchasePrice: number;       
@@ -56,10 +57,11 @@ export class PropertyServices {
         return property;
     }
 
-    public async create({salePrice, register, purchasePrice,  propertyImages }: IProperty) {
+    public async create({title, salePrice, register, purchasePrice,  propertyImages }: IProperty) {
 
         const property = await prisma.property.create({
             data: {
+                title,
                 salePrice, 
                 register, 
                 purchasePrice
@@ -88,7 +90,7 @@ export class PropertyServices {
         return propertyResponse;
     }
 
-    public async update({ id, salePrice, register, purchasePrice,  propertyImages }: IProperty) {
+    public async update({ id, title, salePrice, register, purchasePrice,  propertyImages }: IProperty) {
 
         let property = await this.findById(Number(id));
 
@@ -97,6 +99,7 @@ export class PropertyServices {
                 id
             },
             data: {
+                title,
                 salePrice,
                 register,
                 purchasePrice

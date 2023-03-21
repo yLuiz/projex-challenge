@@ -1,0 +1,71 @@
+<section class="form-section">
+    <form (ngSubmit)="submit()" [formGroup]="propertyForm" #formDir="ngForm">
+        <div class="form-group">
+            <input [ngClass]="{'invalid': (title?.invalid && formDir.submitted) }" type="text" id="title"
+                placeholder="Digite seu nome" formControlName="title" required>
+            <label for="title">Título</label>
+            <span *ngIf="title!.errors?.['required'] && formDir.submitted">
+                Título é obrigatório
+            </span>
+        </div>
+
+        <div class="form-group">
+            <input [ngClass]="{'invalid': (register?.invalid && formDir.submitted) }" type="number" id="register"
+                placeholder="Digite seu register" formControlName="register" required>
+            <label for="register">Número de registro</label>
+            <span *ngIf="register!.errors?.['required'] && formDir.submitted">
+                Registro é obrigatório
+            </span>
+            <span *ngIf="register!.errors?.['pattern']">
+                Escreva um registro válido
+            </span>
+        </div>
+
+        <!-- preço de venda -->
+
+        <div class="form-group">
+            <input [ngClass]="{'invalid': (salePrice?.invalid && formDir.submitted) }" type="number" id="salePrice"
+                placeholder="Digite o preço de venda" formControlName="salePrice" required>
+            <label for="salePrice">Preço de venda</label>
+            <span *ngIf="salePrice!.errors?.['required'] && formDir.submitted">
+                Preço de venda é obrigatório
+            </span>
+        </div>
+
+        <!-- preço de compra -->
+
+        <div class="form-group">
+            <input [ngClass]="{'invalid': (purchasePrice?.invalid && formDir.submitted) }" type="number" id="purchasePrice"
+                placeholder="Digite o preço de compra" formControlName="purchasePrice" required>
+            <label for="purchasePrice">Preço de compra</label>
+            <span *ngIf="purchasePrice!.errors?.['required'] && formDir.submitted">
+                Preço de compra é obrigatório
+            </span>
+        </div>
+
+        <!-- status -->
+
+        <div class="form-group">
+            <select name="status" id="status">
+                <option value="2">Estoque</option>
+                <option value="1">Vendido</option>
+            </select>
+        </div>
+
+        <!-- imagens -->
+
+        <div class="form-group">
+            <input 
+                (change)="handleFile($event)"
+                type="file" 
+                id="images"
+                placeholder="Digite sua senha" 
+                required>
+            <label for="images">Escolha imagens</label>
+        </div>
+
+        <input type="submit" value="{{buttonText}}">
+
+    </form>
+</section>
+

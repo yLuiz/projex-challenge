@@ -1,5 +1,6 @@
 export interface IPropertyResponse {
   id?: number;
+  title: string;
   register: number;         
   salePrice: number;        
   purchasePrice: number;       
@@ -9,6 +10,7 @@ export interface IPropertyResponse {
 
 export interface IPropertyRequest {
   id?: number;
+  title: string;
   register: number;         
   salePrice: number;        
   purchasePrice: number;       

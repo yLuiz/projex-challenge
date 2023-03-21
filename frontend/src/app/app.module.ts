@@ -12,6 +12,9 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { HomeComponent } from './components/home/home.component';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { PropertyFormComponent } from './components/property-form/property-form.component';
+import { PropertyRegisterComponent } from './components/property-register/property-register.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { UserRegisterComponent } from './components/user-register/user-register.
     DialogComponent,
     HomeComponent,
     UserEditComponent,
-    UserRegisterComponent
+    UserRegisterComponent,
+    DashboardComponent,
+    PropertyFormComponent,
+    PropertyRegisterComponent
   ],
   imports: [
     BrowserModule,
