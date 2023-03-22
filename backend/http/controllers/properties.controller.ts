@@ -15,7 +15,7 @@ export class PropertiesController {
     public async findById(req: Request, res: Response) {}
 
     public async create(req: Request, res: Response) {
-        const { salePrice, register, purchasePrice }: IProperty = req.body;
+        const { salePrice, register, purchasePrice, title }: IProperty = req.body;
         
         const propertyAlreadyExists = await propertyServices.findByRegister(Number(register));
 
@@ -34,6 +34,7 @@ export class PropertiesController {
         }
 
         const property = await propertyServices.create({
+            title,
             salePrice: Number(salePrice),
             register: Number(register),
             purchasePrice: Number(purchasePrice),
@@ -52,7 +53,7 @@ export class PropertiesController {
             return res.status(404).json({ message: "Property not found." });
         }
 
-        const { salePrice, register, purchasePrice }: IProperty = req.body;
+        const { title, salePrice, register, purchasePrice }: IProperty = req.body;
         
         const propertyAlreadyExists = await propertyServices.findByRegister(Number(register));
 
@@ -66,6 +67,7 @@ export class PropertiesController {
 
         const updatedProperty = await propertyServices.update({
             id: Number(id),
+            title,
             salePrice: Number(salePrice),
             register: Number(register),
             purchasePrice: Number(purchasePrice),

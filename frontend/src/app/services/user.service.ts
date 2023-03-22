@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { from, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { IUserResponse } from 'src/interfaces/user.interface';
+import { IUserRequest, IUserResponse } from 'src/interfaces/user.interface';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -17,6 +17,14 @@ export class UserService {
 
   public getUserById(id: number): Observable<{ user: IUserResponse}> {
     return this.http.get<{ user: IUserResponse}>(`${environment.api_url}/user/${id}`);
+  }
+
+  public register({name, email, password}: IUserRequest) {
+    return this.http.post<{ user: IUserResponse}>(`${environment.api_url}/user/`, {
+      name,
+      email,
+      password
+    })
   }
 
 }

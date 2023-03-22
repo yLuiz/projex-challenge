@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,8 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 export class AuthGuard implements CanActivate {
 
   constructor(
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
@@ -16,6 +18,7 @@ export class AuthGuard implements CanActivate {
   
     const url = route.url[0].path;
     const loginOrRegister = url === "login" || url === "register";
+
     
     if (loginOrRegister && !localToken) {
       console.log(url);
@@ -23,7 +26,6 @@ export class AuthGuard implements CanActivate {
     }
 
     if (loginOrRegister && localToken) {
-      console.log(url);
       this.router.navigate(['/home'])
       return false;
     }
@@ -32,6 +34,15 @@ export class AuthGuard implements CanActivate {
       this.router.navigate(['/login']);
       return false;
     };
+
+    if (localToken) {
+      const validToken = this.authService.isValidToken(localToken);
+      if (!validToken) {
+        localStorage.removeItem('token');
+        this.router.navigate(['/login']);
+        return false;
+      }
+    }
 
     return true;
 

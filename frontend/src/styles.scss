@@ -63,6 +63,24 @@ form {
                 color: #006aff;
             }
         }
+
+        select {
+            padding-left: 10px;
+            border: 1px solid #ccc;
+            outline: none;
+            width: 100%;
+            height: 30px;
+            border-radius: 6px;
+    
+            transition: all 0.2s ease-in-out;
+    
+            margin: 14px 0;
+        }
+    
+        select:focus {
+            border-color: #006aff;
+        }
+
     }
 
     a {
