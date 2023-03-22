@@ -18,8 +18,7 @@ export class UserEditComponent implements OnInit {
   ) { }
 
   editUser(user: IUserRequest) {
-    console.log("testes")
-    console.log(user)
+    console.log(user);
   }
 
   async ngOnInit(): Promise<void> {

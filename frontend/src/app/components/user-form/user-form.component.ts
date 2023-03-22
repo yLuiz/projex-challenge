@@ -31,6 +31,11 @@ export class UserFormComponent implements OnInit {
       type: "error" as TypeDialog
     }
 
+    if (this.userForm.invalid) {
+      dialogConfig.message = "As senhas não são correspondem";
+      return;
+    }
+
     if (this.password!.value !== this.confirmedPassword!.value) {
 
       console.log(this.password, this.confirmedPassword)

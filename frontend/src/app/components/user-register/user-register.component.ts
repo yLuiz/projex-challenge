@@ -11,10 +11,9 @@ export class UserRegisterComponent implements OnInit {
   constructor() { }
 
   registerUser(user: IUserRequest) {
-    console.log(user)
+    console.log(user);
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }
