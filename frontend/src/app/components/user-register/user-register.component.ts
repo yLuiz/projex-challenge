@@ -28,9 +28,7 @@ export class UserRegisterComponent implements OnInit {
               if (response.token) {
                 localStorage.setItem('token', response.token);
     
-                setTimeout(() => {
-                  this.router.navigate(['/home']);
-                }, 1000);
+                this.router.navigate(['/home']);
               }
             }
           });

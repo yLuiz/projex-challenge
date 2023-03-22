@@ -148,4 +148,10 @@ export class PropertyServices {
 
 
     public async deleteById(id: number) {}
+
+    public async deleteAll() {
+        await prisma.property.deleteMany();
+
+        return;
+    }
 }

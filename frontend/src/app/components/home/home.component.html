@@ -19,19 +19,19 @@
   
     <div class="actions-list">
       <ul>
-        <li>
+        <li (click)="closeMenu()" >
           <a routerLink="dashboard">
             <i class="bi bi-kanban-fill"></i>
             Dashboard
           </a>
         </li>
-        <li>
+        <li (click)="closeMenu()" >
           <a routerLink="user">
             <i class="bi bi-person-fill-gear"></i>
             Editar usuário
           </a>
         </li>
-        <li>
+        <li (click)="closeMenu()" >
           <a routerLink="property">
             <i class="bi bi-house-add-fill"></i>
             Cadastrar Imóvel

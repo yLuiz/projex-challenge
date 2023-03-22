@@ -24,7 +24,15 @@ export class UserService {
       name,
       email,
       password
-    })
+    });
+  }
+
+  public update({name, email, password}: IUserRequest) {
+    return this.http.put<{ user: IUserResponse}>(`${environment.api_url}/user/`, {
+      name,
+      email,
+      password
+    });
   }
 
 }

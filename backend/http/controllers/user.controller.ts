@@ -28,7 +28,7 @@ export class UserController {
         const user = await userServices.create({ email, name, password });
 
         if (!user) return res.status(422).json({
-            message: "Name, email and password is required."
+            message: "Name, email and password are required."
         })
 
         const token = createJWT({ email, password, sub: user.id });

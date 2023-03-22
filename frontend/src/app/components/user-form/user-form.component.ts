@@ -15,6 +15,8 @@ export class UserFormComponent implements OnInit {
   @Input() buttonText = 'Cadastrar';
   @Input() user: IUserResponse | null = null;
 
+  @Input() headerTitle = "";
+
   userForm!: FormGroup;
   matchedPassword = true;
 

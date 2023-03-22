@@ -27,9 +27,15 @@ export class PropertiesController {
         
         const files = req.files as Express.Multer.File[];
 
-        if (!files) {
+        if (!files.length) {
             return res.status(422).json({
                 message: "Images is required."
+            })
+        }
+
+        if (!salePrice || !register || !purchasePrice || !title) {
+            return res.status(422).json({
+                message: "salePrice, register, purchasePrice and title are required."
             })
         }
 
@@ -81,5 +87,11 @@ export class PropertiesController {
 
 
     public async deleteById(req: Request, res: Response) {}
+
+    public async deleteAll(req: Request, res: Response) {
+        await propertyServices.deleteAll();
+
+        return res.json({ message: "All properties deleted." });
+    }
 
 }

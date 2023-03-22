@@ -1,3 +1,10 @@
+interface Image {
+  id: number;
+  name: string;
+  propertyId: number;
+}
+
+
 export interface IPropertyResponse {
   id?: number;
   title: string;
@@ -5,7 +12,7 @@ export interface IPropertyResponse {
   salePrice: number;        
   purchasePrice: number;       
   propertyStatusId?: number; 
-  propertyImages: string[]
+  PropertyImage: Image[]
 }
 
 export interface IPropertyRequest {
@@ -16,4 +23,14 @@ export interface IPropertyRequest {
   purchasePrice: number;       
   propertyStatusId?: number; 
   images: File[]
+}
+
+export interface IPropertyForm {
+  id?: number;
+  title: string;
+  register: number;         
+  salePrice: number;        
+  purchasePrice: number;       
+  status?: number; 
+  images: FileList
 }

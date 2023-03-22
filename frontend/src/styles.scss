@@ -31,10 +31,13 @@ form {
     .form-group {
         position: relative;
 
+        margin: 14px 0;
+        border-radius: 6px;
+
         label {
             position: absolute;
     
-            top: 6px;
+            top: -9px;
             left: 6px;
     
             font-size: .75rem;
@@ -42,6 +45,8 @@ form {
             background-color: #FFF;
     
             transition: all 0.2s ease-in-out;
+
+            z-index: 2;
         }
     
         input {
@@ -53,8 +58,19 @@ form {
             border-radius: 6px;
     
             transition: all 0.2s ease-in-out;
-    
-            margin: 14px 0;
+        }
+
+        &.currency {
+
+            margin-top: 20px;
+
+            input {
+                padding-left: 30px;
+            }
+
+            label {
+                top: -15px;
+            }
         }
     
         input:focus {
@@ -73,12 +89,34 @@ form {
             border-radius: 6px;
     
             transition: all 0.2s ease-in-out;
-    
-            margin: 14px 0;
         }
     
         select:focus {
             border-color: #006aff;
+        }
+
+        input[type="file"]#images {
+            display: none;
+        }
+
+        #imagesLabel {
+            position: static;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            gap: 10px;
+
+            border-radius: 6px;
+            border: 1px solid #006aff;
+            color: #006aff;
+
+            height: 40px;
+
+            i {
+                font-size: 1.2rem;
+            }
         }
 
     }
@@ -110,7 +148,7 @@ form {
         justify-content: center;
         align-items: center;
 
-        margin-top: 10px;
+        margin: 15px 0;
         color: #FFF;
         border-radius: 6px;
         height: 40px;

@@ -1,4 +1,12 @@
 <section class="form-section">
+
+  <header>
+    <a routerLink="/home" class="back-button">
+        <i class="bi bi-arrow-left"></i>
+    </a>
+
+    <h1>{{ headerTitle }}</h1>
+</header>
   <form (ngSubmit)="submit()" [formGroup]="userForm" #formDir="ngForm">
     <div class="form-group">
       <input [ngClass]="{'invalid': (name?.invalid && formDir.submitted) }" type="text" id="name" placeholder="Digite seu nome"formControlName="name" required>

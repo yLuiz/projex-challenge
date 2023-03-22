@@ -1,1 +1,12 @@
-<p>dashboard works!</p>
+<section>
+  <h1>Dashboard</h1>
+  <div class="properties-container">
+    <ul>
+      <li *ngFor="let property of properties">
+        
+        <h3>{{ property.title }}</h3>
+        <img width="180" src="http://localhost:3000/uploads/properties/{{ property.PropertyImage[0].name }}" title="{{ property.title }}" alt="Imóvel {{ property.title }}">
+      </li>
+    </ul>
+  </div>
+</section>
