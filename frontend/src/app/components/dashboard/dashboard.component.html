@@ -1,11 +1,14 @@
-<section>
+<section class="dashboard-section">
   <h1>Dashboard</h1>
   <div class="properties-container">
     <ul>
       <li *ngFor="let property of properties">
-        
         <h3>{{ property.title }}</h3>
-        <img width="180" src="http://localhost:3000/uploads/properties/{{ property.PropertyImage[0].name }}" title="{{ property.title }}" alt="Imóvel {{ property.title }}">
+        <img src="http://localhost:3000/uploads/properties/{{ property.PropertyImage[0].name }}" title="{{ property.title }}" alt="Imóvel {{ property.title }}">
+        <div class="actions">
+          <button (click)="goToBuyout()" class="buy-button">COMPRAR</button>
+          <button (click)="goToDetails()" class="details-button">DETALHES</button>
+        </div>
       </li>
     </ul>
   </div>

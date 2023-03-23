@@ -15,6 +15,14 @@ export class DashboardComponent implements OnInit {
 
   properties: IPropertyResponse[] = [];
 
+  goToDetails() {
+
+  }
+
+  goToBuyout() {
+    
+  }
+
   ngOnInit(): void {
 
     this.propertyService.getAll().subscribe({

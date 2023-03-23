@@ -15,6 +15,7 @@ import { UserRegisterComponent } from './components/user-register/user-register.
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PropertyFormComponent } from './components/property-form/property-form.component';
 import { PropertyRegisterComponent } from './components/property-register/property-register.component';
+import { ApresentationComponent } from './components/apresentation/apresentation.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { PropertyRegisterComponent } from './components/property-register/proper
     UserRegisterComponent,
     DashboardComponent,
     PropertyFormComponent,
-    PropertyRegisterComponent
+    PropertyRegisterComponent,
+    ApresentationComponent
   ],
   imports: [
     BrowserModule,

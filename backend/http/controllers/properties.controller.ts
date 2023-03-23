@@ -17,7 +17,7 @@ export class PropertiesController {
     public async create(req: Request, res: Response) {
         const { salePrice, register, purchasePrice, title }: IProperty = req.body;
         
-        const propertyAlreadyExists = await propertyServices.findByRegister(Number(register));
+        const propertyAlreadyExists = await propertyServices.findByRegister(register);
 
         if (propertyAlreadyExists) {
             return res.status(400).json({ 
@@ -42,7 +42,7 @@ export class PropertiesController {
         const property = await propertyServices.create({
             title,
             salePrice: Number(salePrice),
-            register: Number(register),
+            register,
             purchasePrice: Number(purchasePrice),
             propertyImages: files
         });
@@ -61,9 +61,9 @@ export class PropertiesController {
 
         const { title, salePrice, register, purchasePrice }: IProperty = req.body;
         
-        const propertyAlreadyExists = await propertyServices.findByRegister(Number(register));
+        const propertyAlreadyExists = await propertyServices.findByRegister(register);
 
-        if (propertyAlreadyExists && Number(register) !== property.register) {
+        if (propertyAlreadyExists && register !== property.register) {
             return res.status(400).json({
                 message: "One property with this register already exists."
             });
@@ -75,7 +75,7 @@ export class PropertiesController {
             id: Number(id),
             title,
             salePrice: Number(salePrice),
-            register: Number(register),
+            register,
             purchasePrice: Number(purchasePrice),
             propertyImages: files
         });

@@ -27,8 +27,10 @@ export class PropertyFormComponent implements OnInit {
     const status = (<HTMLSelectElement>event.target).value;
 
     this.propertyForm.patchValue({ status });
+  }
 
-    console.log(this.propertyForm.get('status')?.value);
+  toString(value: number) {
+    return String(value);
   }
 
   onFileSelected(event: Event) {
@@ -61,12 +63,8 @@ export class PropertyFormComponent implements OnInit {
   }
 
   submit() {
-
-    if (this.propertyForm.invalid) {
-      return;
-    }
-
-    if (!this.images?.value) {
+    
+    if (!this.images?.value || String(this.register?.value).length > 11 || this.propertyForm.invalid) {
       this.dialogService.show({
         header: "Campos inválidos",
         message: "Preencha todos os campos corretamente",

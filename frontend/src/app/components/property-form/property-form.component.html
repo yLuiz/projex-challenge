@@ -25,7 +25,7 @@
             <span *ngIf="register!.errors?.['required'] && formDir.submitted">
                 Registro é obrigatório
             </span>
-            <span *ngIf="register!.errors?.['pattern']">
+            <span *ngIf="toString(register!.value).length > 11">
                 Escreva um registro válido
             </span>
         </div>
@@ -58,8 +58,8 @@
 
         <div class="form-group">
             <select name="status" id="status" (change)="onSelectedStatus($event)">
-                <option value="2">Estoque</option>
-                <option value="1">Vendido</option>
+                <option value="1">Estoque</option>
+                <option value="2">Vendido</option>
             </select>
         </div>
 

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ApresentationComponent } from './components/apresentation/apresentation.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -16,7 +17,9 @@ const routes: Routes = [
     children: [
       { path: 'user', component: UserEditComponent },
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'property', component: PropertyRegisterComponent }
+      { path: 'property', component: PropertyRegisterComponent },
+      { path: '', pathMatch: 'full', component: ApresentationComponent }
+
     ]
   },
   { path: '**', redirectTo: 'login' }

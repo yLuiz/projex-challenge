@@ -22,7 +22,7 @@ model User {
 model Property {
   id               Int             @id() @default(autoincrement())
   title            String
-  register         Int             @unique
+  register         String          @unique
   salePrice        Int
   purchasePrice    Int?
   createdAt        DateTime        @default(now())

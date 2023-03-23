@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 export interface IProperty {
     id?: number;
     title:  string;
-    register: number;         
+    register: string;         
     salePrice: number;        
     purchasePrice: number;       
     propertyStatusId?: number; 
@@ -43,7 +43,7 @@ export class PropertyServices {
         return property;
     }
 
-    public async findByRegister(register: number) {
+    public async findByRegister(register: string) {
         const property = await prisma.property.findFirst({
             where: {
                 register
@@ -56,6 +56,8 @@ export class PropertyServices {
 
         return property;
     }
+
+    
 
     public async create({title, salePrice, register, purchasePrice,  propertyImages }: IProperty) {
 

@@ -114,10 +114,19 @@ form {
 
             height: 40px;
 
+            cursor: pointer;
+
             i {
                 font-size: 1.2rem;
             }
         }
+
+        #imagesLabel:hover {
+            border: 1px solid #589eff;
+            color: #FFF;
+            background-color: #589eff;
+        }
+
 
     }
 
