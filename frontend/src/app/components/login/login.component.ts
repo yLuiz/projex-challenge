@@ -58,7 +58,11 @@ export class LoginComponent implements OnInit, OnDestroy {
             });
 
             setTimeout(() => {
-              this.router.navigate(['/home']);
+              this.router.navigate(['/home'], {
+                state: {
+                  myState: "My State"
+                }
+              });
             }, 1000);
           }
           this.loadingLogin = false;

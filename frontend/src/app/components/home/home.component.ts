@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { MenuService } from './services/menu.service';
 
@@ -11,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     public menuService: MenuService,
-    private authService: AuthService
+    private authService: AuthService,
   ) { }
 
   visible: boolean = false;
@@ -35,6 +36,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void { 
+
     this.menuService.visible.subscribe(visible => {
       this.visible = visible;
     })

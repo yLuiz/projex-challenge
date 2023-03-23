@@ -22,11 +22,14 @@
         <li (click)="closeMenu()" >
           <a routerLink="home">
             <i class="bi bi-door-open-fill"></i>
-            Home
+            Início
           </a>
         </li>
         <li (click)="closeMenu()" >
-          <a routerLink="dashboard">
+
+          <!-- Aqui é passado um 'state' que pode ser acessado com 'this.router.getCurrentNavigation()' 
+          dentro do componente que está rota estar direcionando; -->
+          <a [state]="{data: 'myState'}" routerLink="dashboard">
             <i class="bi bi-kanban-fill"></i>
             Dashboard
           </a>

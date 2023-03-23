@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PropertyService } from 'src/app/services/property.service';
 import { IPropertyResponse } from 'src/interfaces/property.interface';
 
@@ -10,7 +11,8 @@ import { IPropertyResponse } from 'src/interfaces/property.interface';
 export class DashboardComponent implements OnInit {
 
   constructor(
-    private propertyService: PropertyService
+    private propertyService: PropertyService,
+    private router: Router
   ) { }
 
   properties: IPropertyResponse[] = [];
@@ -34,6 +36,10 @@ export class DashboardComponent implements OnInit {
         console.log(response);
       }
     })
+
+    let stateData = this.router.getCurrentNavigation();
+
+    console.log(stateData)
 
   }
 

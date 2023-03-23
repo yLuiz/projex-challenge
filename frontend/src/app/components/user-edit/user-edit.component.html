@@ -1,5 +1,6 @@
 <app-user-form 
   headerTitle="Edite seu usuário" 
+  buttonText="Editar"
   *ngIf="user" 
   [user]="user"
   (onSubmit)="editUser($event)"
