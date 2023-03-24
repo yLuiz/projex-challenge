@@ -4,8 +4,8 @@
 
 export const environment = {
   
-  
-  api_url: 'http://localhost:3000',
+  // api_url: 'http://localhost:3000',
+  api_url: "https://projex-challenge-production.up.railway.app",
   production: false
 };
 
