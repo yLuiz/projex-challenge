@@ -1,4 +1,38 @@
-## Desafio
+<h1 align="center">Desafio Projex</h1>
+
+# Acesso
+
+https://projex-challenge.vercel.app/home
+
+<h2 align="center">FRONT-END</h2>
+
+# Instalação
+Para instalar, basta clonar o repositório e rodar o comando: 
+``` bash
+ npm install
+```
+
+# Inicialização
+Após concluir a instalação, você deve rodar o seguinte comando para iniciar o projeto:
+``` bash
+ npm run dev
+```
+
+<h2 align="center">BACK-END</h2>
+
+Para instalar, basta clonar o repositório e rodar o comando: 
+``` bash
+ npm install
+```
+
+# Inicialização
+Após concluir a instalação, você deve rodar o seguinte comando para iniciar o projeto:
+``` bash
+ npm run dev
+```
+
+## SOBRE O DESAFIO:
+
 Desenvolva uma aplicação em Angular2+ para um corretor de imóveis onde,
 
 Obrigatório:
@@ -43,18 +77,18 @@ Técnicamente irei avaliar o projeto, outras pessoas vão avaliar como se fossem
 
 ## Rotas Backend:
 	# User
-	`
-		Create 				 	[POST]		- /user
-		Authentication 	[POST]		- /user/auth
-		UpdateByToken  	[PUT]			- /user
-		GetByEmail		 	[GET]			- /user?email=
-		GetById 			 	[GET]			- /user/:id
-		DeleteById			[DELETE]  - /user/:id
-	`
+	
+		Create [POST] - /user
+		Authentication [POST] - /user/auth
+		UpdateByToken [PUT] - /user
+		GetByEmail [GET] - /user?email=
+		GetById [GET] - /user/:id
+		DeleteById [DELETE]  - /user/:id
+	
 	# Property
-	`
-		Create 				 		[POST]		- /property
-		UpdateById				[PUT]			- /property/:id
-		GetAllProperties	[GET]			- /property
-		GetById 			 		[GET]			- /property/:id
-	`
+	
+		Create [POST] - /property
+		UpdateById [PUT] - /property/:id
+		GetAllProperties [GET] - /property
+		GetById [GET] - /property/:id
+	
