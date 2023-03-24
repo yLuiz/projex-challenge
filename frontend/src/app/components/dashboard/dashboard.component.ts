@@ -10,6 +10,10 @@ import { IPropertyResponse } from 'src/interfaces/property.interface';
 })
 export class DashboardComponent implements OnInit {
 
+  profit = 0;
+  amountStock = 0;
+  amountSold = 0;
+
   constructor(
     private propertyService: PropertyService,
     private router: Router

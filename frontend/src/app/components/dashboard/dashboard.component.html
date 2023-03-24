@@ -1,5 +1,22 @@
 <section class="dashboard-section">
   <h1>Dashboard</h1>
+
+  <div class="dashboard-container">
+    <div class="card">
+      <h3>Total em estoque</h3>
+      <p>{{ amountStock }}</p>
+    </div>
+    <div class="card">
+      <h3>Total vendidos</h3>
+      <p>{{ amountSold }}</p>
+    </div>
+    <div class="card">
+      <h3>Lucro</h3>
+      <p>R${{ profit }}</p>
+    </div>
+
+  </div>
+
   <div class="properties-container">
     <ul>
       <li *ngFor="let property of properties">
