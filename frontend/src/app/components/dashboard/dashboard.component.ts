@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { PropertyService } from 'src/app/services/property.service';
 import { environment } from 'src/environments/environment';
 import { IPropertyResponse } from 'src/interfaces/property.interface';
@@ -11,14 +12,28 @@ import { IPropertyResponse } from 'src/interfaces/property.interface';
 })
 export class DashboardComponent implements OnInit {
 
-  profitTotal = 0;
+  totalProfit = 0;
   amountStock = 0;
   amountSold = 0;
-  percentProfitTotal = 0;
+  totalPercentProfit = 0;
+  totalExpense = 0;
+  totalSale = 0;
+
+
+  data: any;
+
+  chartOptions: any;
+
+  subscription!: Subscription;
+
+  // config: AppConfig;
+
+
 
   constructor(
     private propertyService: PropertyService,
-    private router: Router
+    private router: Router,
+    // private configService: AppConfigService
   ) { }
 
   environment = environment;
@@ -29,6 +44,7 @@ export class DashboardComponent implements OnInit {
   goToBuyout() {}
 
   ngOnInit(): void {
+
 
     this.propertyService.getAll().subscribe({
       next: (response) => {
@@ -41,12 +57,35 @@ export class DashboardComponent implements OnInit {
             this.amountSold += 1;
           }
 
-          console.log(property.propertyProfit)
-          this.profitTotal += Number(property.propertyProfit);
+          this.totalExpense += Number(property.purchasePrice);
+
+          if (property.propertyStatusId === 2) { //status 1 => estoque;  status 2 => vendido
+            this.totalSale += Number(property.salePrice);
+            this.totalProfit += Number(property.propertyProfit);
+          }
+
 
         })
+        
+        this.data = {
+          labels: ['Total dos gastos (R$)','Total das vendas (R$)','Total dos lucros (R$)'],
+          datasets: [
+              {
+                  data: [this.totalExpense, this.totalSale, this.totalProfit],
+                  backgroundColor: [
+                      "#ff3131",
+                      "#7ee954",
+                      "#36A2EB"
+                  ],
+                  hoverBackgroundColor: [
+                      "#ff3131",
+                      "#7ee954",
+                      "#36A2EB"
+                  ]
+              }
+          ]
+        };
 
-        console.log(response);
       },
       error: (response) => {
         console.log(response);

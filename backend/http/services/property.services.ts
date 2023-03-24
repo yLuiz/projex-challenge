@@ -64,13 +64,6 @@ export class PropertyServices {
         const profit = (Number(salePrice) - Number(purchasePrice)).toFixed(2);
         const profitPercent = (Number(profit) * 100 / salePrice).toFixed(2);
 
-        // console.log(`
-        //     salePrice: ${salePrice}
-        //     purchasePrice: ${purchasePrice}
-        //     diference: ${salePrice - purchasePrice}
-        //     profit: ${profit}
-        // `)
-
         const property = await prisma.property.create({
             data: {
                 title,
@@ -167,6 +160,11 @@ export class PropertyServices {
         const property = await this.findById(id);
         if (!property) return null;
 
+        property!.PropertyImage.map(propertyImage => {
+            const imagePath = path.resolve(__dirname, '..', '..', 'uploads', 'properties', `${propertyImage.name}`);
+            fs.unlink(imagePath, () => null);
+        });
+
         await prisma.propertyImage.deleteMany({
             where: {
                 propertyId: id
@@ -184,6 +182,14 @@ export class PropertyServices {
     }
 
     public async deleteAll() {
+
+        const images = await prisma.propertyImage.findMany();
+
+        images.map(image => {
+            const imagePath = path.resolve(__dirname, '..', '..', 'uploads', 'properties', `${image.name}`);
+            fs.unlink(imagePath, () => null);
+        });
+
         await prisma.propertyImage.deleteMany();
         await prisma.property.deleteMany();
 

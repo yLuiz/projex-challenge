@@ -14,6 +14,17 @@
   }
 
   width: 90vw;
+
+  .charts-container {
+
+    display: flex;
+
+    justify-content: center;
+
+    width: 100%;
+    height: 30%;
+  }
+
 }
 
 .dashboard-container {
@@ -39,11 +50,16 @@
     border: 1px solid #0077ff;
     box-shadow: 0 0 3px rgba(0, 119, 255, 0.5);
 
+    h3 {
+      color: #3b3b3b;
+    }
+
     p {
       display: inline-block;
+      color: #6f6f6f;
     }
     
-
+    // color: #7ee954;
   }
 }
 
@@ -56,7 +72,7 @@ tr td.table-data-image {
 .table-container {
   border-radius: 4px;
 
-  margin-top: 40px;
+  margin: 40px 0 80px;
 
   width: 100%;
   max-height: 65vh;

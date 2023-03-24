@@ -1,6 +1,11 @@
 <section class="dashboard-section">
   <h1>Dashboard</h1>
 
+  <div class="charts-container">
+    <p-chart *ngIf="properties.length" type="doughnut" [data]="data" [options]="chartOptions" [style]="{'width': '30%'}"></p-chart>
+    <p *ngIf="!properties.length" >Não há imóveis vendidos ou em estoque.</p>
+  </div>
+
   <div class="dashboard-container">
     <div class="card">
       <h3>Total em estoque</h3>
@@ -12,7 +17,7 @@
     </div>
     <div class="card">
       <h3>Lucro</h3>
-      <p>{{ profitTotal | currency:'BRL'}}</p>
+      <p>{{ totalProfit | currency:'BRL'}}</p>
     </div>
 
   </div>
@@ -37,7 +42,7 @@
               <td>{{property.salePrice | currency:'BRL'}}</td>
               <td>{{property.purchasePrice | currency: 'BRL'}}</td>
               <td>{{property.propertyProfit | currency: 'BRL'}}</td>
-              <td>{{ property.propertyProfitPercent | percent}}</td>
+              <td>{{ property.propertyProfitPercent | number:'1.2-2'}}%</td>
               <td>{{property.propertyStatusId == 1 ? "Estoque" : "Vendido"}}</td>
             </tr>
         </ng-template>

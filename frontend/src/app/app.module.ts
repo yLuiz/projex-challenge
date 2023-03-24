@@ -19,6 +19,7 @@ import { PropertyRegisterComponent } from './components/property-register/proper
 import { ApresentationComponent } from './components/apresentation/apresentation.component';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ButtonModule } from 'primeng/button';
     FormsModule,
     ReactiveFormsModule,
     TableModule,
-    ButtonModule
+    ButtonModule,
+    ChartModule
   ],
   providers: [
     {
