@@ -11,7 +11,9 @@ export interface IPropertyResponse {
   register: string;         
   salePrice: number;        
   purchasePrice: number;       
-  propertyStatusId?: number; 
+  propertyStatusId?: number;
+  propertyProfit: number;
+  propertyProfitPercent: number;
   PropertyImage: Image[]
 }
 

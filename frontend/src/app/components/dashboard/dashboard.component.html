@@ -12,21 +12,37 @@
     </div>
     <div class="card">
       <h3>Lucro</h3>
-      <p>R${{ profit }}</p>
+      <p>{{ profitTotal | currency:'BRL'}}</p>
     </div>
 
   </div>
 
-  <div class="properties-container">
-    <ul>
-      <li *ngFor="let property of properties">
-        <h3>{{ property.title }}</h3>
-        <img src="http://localhost:3000/uploads/properties/{{ property.PropertyImage[0].name }}" title="{{ property.title }}" alt="Imóvel {{ property.title }}">
-        <div class="actions">
-          <!-- <button (click)="goToBuyout()" class="buy-button">COMPRAR</button> -->
-          <button (click)="goToDetails()" class="details-button">DETALHES</button>
-        </div>
-      </li>
-    </ul>
+  <div class="table-container">
+    <p-table responsiveLayout="scroll" [value]="properties" [tableStyle]="{'width': '100%', 'overflow': 'auto'}">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th pSortableColumn="title">Título <p-sortIcon field="code"></p-sortIcon></th>
+              <th>Prévia</th>
+              <th pSortableColumn="salePrice">Preço de venda <p-sortIcon field="code"></p-sortIcon></th>
+              <th pSortableColumn="purchasePrice">Preço de compra <p-sortIcon field="code"></p-sortIcon></th>
+              <th pSortableColumn="propertyProfit">Lucro <p-sortIcon field="code"></p-sortIcon></th>
+              <th pSortableColumn="propertyProfitPercent">Percentual <p-sortIcon field="code"></p-sortIcon></th>
+              <th pSortableColumn="propertyStatusId">Status <p-sortIcon field="code"></p-sortIcon></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-property let-columns="columns">
+            <tr>
+              <td>{{property.title}}</td>
+              <td class="table-data-image" ><img src="{{environment.api_url}}/uploads/properties/{{property.PropertyImage[0].name}}" [alt]="property.name" width="100" class="shadow-4" /></td>
+              <td>{{property.salePrice | currency:'BRL'}}</td>
+              <td>{{property.purchasePrice | currency: 'BRL'}}</td>
+              <td>{{property.propertyProfit | currency: 'BRL'}}</td>
+              <td>{{ property.propertyProfitPercent | percent}}</td>
+              <td>{{property.propertyStatusId == 1 ? "Estoque" : "Vendido"}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
   </div>
+
+
 </section>

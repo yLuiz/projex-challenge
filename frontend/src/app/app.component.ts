@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PrimeNGConfig } from 'primeng/api';
 import { DialogService } from './components/dialog/dialog.service';
 
 @Component({
@@ -7,7 +8,11 @@ import { DialogService } from './components/dialog/dialog.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor () {}
+  constructor (
+    private primengConfig: PrimeNGConfig
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.primengConfig.ripple = true;
+  }
 }

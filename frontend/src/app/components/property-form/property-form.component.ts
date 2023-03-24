@@ -63,6 +63,16 @@ export class PropertyFormComponent implements OnInit {
   }
 
   submit() {
+
+    if(Number(this.salePrice?.value) < Number(this.purchasePrice?.value)) {
+      this.dialogService.show({
+        header: "Campos inválidos",
+        message: "O preço de venda não pode ser menor que o preço de comprar.",
+        timer: 2500,
+        type: "error"
+      })
+      return;
+    }
     
     if (!this.images?.value || String(this.register?.value).length > 11 || this.propertyForm.invalid) {
       this.dialogService.show({

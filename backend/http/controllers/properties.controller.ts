@@ -15,7 +15,7 @@ export class PropertiesController {
     public async findById(req: Request, res: Response) {}
 
     public async create(req: Request, res: Response) {
-        const { salePrice, register, purchasePrice, title }: IProperty = req.body;
+        const { salePrice, register, purchasePrice, title, propertyStatusId }: IProperty = req.body;
         
         const propertyAlreadyExists = await propertyServices.findByRegister(register);
 
@@ -39,10 +39,17 @@ export class PropertiesController {
             })
         }
 
+        if (Number(salePrice) < Number(purchasePrice)) {
+            return res.status(422).json({
+                message: "salePrice can not be less then purchasePrice."
+            });
+        }
+
         const property = await propertyServices.create({
             title,
             salePrice: Number(salePrice),
             register,
+            propertyStatusId: propertyStatusId ? Number(propertyStatusId) : undefined,
             purchasePrice: Number(purchasePrice),
             propertyImages: files
         });
@@ -86,7 +93,16 @@ export class PropertiesController {
     }
 
 
-    public async deleteById(req: Request, res: Response) {}
+    public async deleteById(req: Request, res: Response) {
+
+        const { id } = req.params;
+
+        const querySuccess = await propertyServices.deleteById(+id);
+
+        if (!querySuccess) return res.status(404).json({ message: "Deleted with success." });
+
+        return res.json({ message: "Deleted with success." });
+    }
 
     public async deleteAll(req: Request, res: Response) {
         await propertyServices.deleteAll();

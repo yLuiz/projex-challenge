@@ -59,14 +59,27 @@ export class PropertyServices {
 
     
 
-    public async create({title, salePrice, register, purchasePrice,  propertyImages }: IProperty) {
+    public async create({title, salePrice, register, purchasePrice,  propertyImages, propertyStatusId }: IProperty) {
+
+        const profit = (Number(salePrice) - Number(purchasePrice)).toFixed(2);
+        const profitPercent = (Number(profit) * 100 / salePrice).toFixed(2);
+
+        // console.log(`
+        //     salePrice: ${salePrice}
+        //     purchasePrice: ${purchasePrice}
+        //     diference: ${salePrice - purchasePrice}
+        //     profit: ${profit}
+        // `)
 
         const property = await prisma.property.create({
             data: {
                 title,
-                salePrice, 
+                salePrice,   
                 register, 
-                purchasePrice
+                purchasePrice,
+                propertyProfit: profit,
+                propertyProfitPercent: profitPercent,
+                propertyStatusId
             }
         })
 
@@ -149,9 +162,29 @@ export class PropertyServices {
     }
 
 
-    public async deleteById(id: number) {}
+    public async deleteById(id: number) {
+
+        const property = await this.findById(id);
+        if (!property) return null;
+
+        await prisma.propertyImage.deleteMany({
+            where: {
+                propertyId: id
+            }
+        });
+
+        await prisma.property.delete({
+            where: {
+                id
+            }
+        });
+
+        return true;
+
+    }
 
     public async deleteAll() {
+        await prisma.propertyImage.deleteMany();
         await prisma.property.deleteMany();
 
         return;

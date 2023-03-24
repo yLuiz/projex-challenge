@@ -12,6 +12,7 @@ router.put('/:id', isAuthenticated, imageUpload.array('images'), propertiesContr
 
 router.get('/', isAuthenticated, propertiesController.findMany);
 router.get('/:id', isAuthenticated, propertiesController.findById);
+router.delete('/:id', isAuthenticated, propertiesController.deleteById);
 
 router.delete('/', isAuthenticated, propertiesController.deleteAll);
 

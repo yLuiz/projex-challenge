@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +17,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PropertyFormComponent } from './components/property-form/property-form.component';
 import { PropertyRegisterComponent } from './components/property-register/property-register.component';
 import { ApresentationComponent } from './components/apresentation/apresentation.component';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -33,10 +36,13 @@ import { ApresentationComponent } from './components/apresentation/apresentation
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    TableModule,
+    ButtonModule
   ],
   providers: [
     {

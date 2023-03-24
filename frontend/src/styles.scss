@@ -80,6 +80,13 @@ form {
             }
         }
 
+        input.valid, input.valid:focus {
+            border: 1px solid #7fd925;
+            + label {
+                color: #7fd925;
+            }
+        }
+
         select {
             padding-left: 10px;
             border: 1px solid #ccc;

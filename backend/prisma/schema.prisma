@@ -20,16 +20,18 @@ model User {
 }
 
 model Property {
-  id               Int             @id() @default(autoincrement())
-  title            String
-  register         String          @unique
-  salePrice        Int
-  purchasePrice    Int?
-  createdAt        DateTime        @default(now())
-  updatedAt        DateTime        @updatedAt
-  propertyStatus   PropertyStatus  @relation(fields: [propertyStatusId], references: [id])
-  propertyStatusId Int             @default(2)
-  PropertyImage    PropertyImage[]
+  id                    Int             @id() @default(autoincrement())
+  title                 String
+  register              String          @unique
+  salePrice             Decimal
+  purchasePrice         Decimal?
+  createdAt             DateTime        @default(now())
+  updatedAt             DateTime        @updatedAt
+  propertyStatus        PropertyStatus  @relation(fields: [propertyStatusId], references: [id])
+  propertyProfit        Decimal
+  propertyProfitPercent Decimal
+  propertyStatusId      Int             @default(1)
+  PropertyImage         PropertyImage[]
 }
 
 model PropertyStatus {

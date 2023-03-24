@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PropertyService } from 'src/app/services/property.service';
+import { environment } from 'src/environments/environment';
 import { IPropertyResponse } from 'src/interfaces/property.interface';
 
 @Component({
@@ -10,30 +11,41 @@ import { IPropertyResponse } from 'src/interfaces/property.interface';
 })
 export class DashboardComponent implements OnInit {
 
-  profit = 0;
+  profitTotal = 0;
   amountStock = 0;
   amountSold = 0;
+  percentProfitTotal = 0;
 
   constructor(
     private propertyService: PropertyService,
     private router: Router
   ) { }
 
+  environment = environment;
   properties: IPropertyResponse[] = [];
 
-  goToDetails() {
+  goToDetails() {}
 
-  }
-
-  goToBuyout() {
-    
-  }
+  goToBuyout() {}
 
   ngOnInit(): void {
 
     this.propertyService.getAll().subscribe({
       next: (response) => {
-        this.properties = response.properties
+        this.properties = response.properties;
+
+        response.properties.map((property) => {
+          if (property.propertyStatusId === 1) {
+            this.amountStock += 1;
+          } else {
+            this.amountSold += 1;
+          }
+
+          console.log(property.propertyProfit)
+          this.profitTotal += Number(property.propertyProfit);
+
+        })
+
         console.log(response);
       },
       error: (response) => {

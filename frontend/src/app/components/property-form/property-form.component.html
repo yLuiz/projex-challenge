@@ -10,7 +10,7 @@
     
     <form (ngSubmit)="submit()" [formGroup]="propertyForm" #formDir="ngForm">
         <div class="form-group">
-            <input [ngClass]="{'invalid': (title?.invalid && formDir.submitted) }" type="text" id="title"
+            <input [ngClass]="{'invalid': (title?.invalid && formDir.submitted), 'valid': !title?.invalid && title?.value.length > 1 }" type="text" id="title"
                 placeholder="Digite seu nome" formControlName="title" required>
             <label for="title">Título</label>
             <span *ngIf="title!.errors?.['required'] && formDir.submitted">
@@ -19,11 +19,20 @@
         </div>
 
         <div class="form-group">
-            <input maxlength="11" [ngClass]="{'invalid': (register?.invalid && formDir.submitted) }" type="number" id="register"
-                placeholder="Digite seu register" formControlName="register" required>
+            <input maxlength="11" 
+                [ngClass]="{
+                    'invalid': (register?.invalid && formDir.submitted) || toString(register!.value).length > 1 && toString(register!.value).length < 11, 'valid': toString(register!.value).length === 11 }" 
+                type="number" 
+                id="register"
+                placeholder="Digite seu register" 
+                formControlName="register" 
+                required>
             <label for="register">Número de registro</label>
             <span *ngIf="register!.errors?.['required'] && formDir.submitted">
                 Registro é obrigatório
+            </span>
+            <span *ngIf="toString(register!.value).length > 1 && toString(register!.value).length < 11">
+                O registro precisa ter 11 caracteres
             </span>
             <span *ngIf="toString(register!.value).length > 11">
                 Escreva um registro válido
