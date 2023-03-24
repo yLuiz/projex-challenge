@@ -15,7 +15,8 @@
   },
   "scripts": {
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules ./index.ts",
-    "build": "tsc --outDir build"
+    "build": "tsc --outDir build",
+    "start": "node build/index.js"
   },
   "devDependencies": {
     "@types/cors": "^2.8.13",

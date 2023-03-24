@@ -58,14 +58,26 @@ class PropertyServices {
             return property;
         });
     }
-    create({ salePrice, register, purchasePrice, propertyImages }) {
+    create({ title, salePrice, register, purchasePrice, propertyImages, propertyStatusId }) {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
+            const profit = (Number(salePrice) - Number(purchasePrice)).toFixed(2);
+            const profitPercent = (Number(profit) * 100 / salePrice).toFixed(2);
+            // console.log(`
+            //     salePrice: ${salePrice}
+            //     purchasePrice: ${purchasePrice}
+            //     diference: ${salePrice - purchasePrice}
+            //     profit: ${profit}
+            // `)
             const property = yield prisma.property.create({
                 data: {
+                    title,
                     salePrice,
                     register,
-                    purchasePrice
+                    purchasePrice,
+                    propertyProfit: profit,
+                    propertyProfitPercent: profitPercent,
+                    propertyStatusId
                 }
             });
             const images = propertyImages.map(image => image.filename);
@@ -83,7 +95,7 @@ class PropertyServices {
             return propertyResponse;
         });
     }
-    update({ id, salePrice, register, purchasePrice, propertyImages }) {
+    update({ id, title, salePrice, register, purchasePrice, propertyImages }) {
         return __awaiter(this, void 0, void 0, function* () {
             let property = yield this.findById(Number(id));
             let updatedProperty = yield prisma.property.update({
@@ -91,6 +103,7 @@ class PropertyServices {
                     id
                 },
                 data: {
+                    title,
                     salePrice,
                     register,
                     purchasePrice
@@ -128,7 +141,29 @@ class PropertyServices {
         });
     }
     deleteById(id) {
-        return __awaiter(this, void 0, void 0, function* () { });
+        return __awaiter(this, void 0, void 0, function* () {
+            const property = yield this.findById(id);
+            if (!property)
+                return null;
+            yield prisma.propertyImage.deleteMany({
+                where: {
+                    propertyId: id
+                }
+            });
+            yield prisma.property.delete({
+                where: {
+                    id
+                }
+            });
+            return true;
+        });
+    }
+    deleteAll() {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield prisma.propertyImage.deleteMany();
+            yield prisma.property.deleteMany();
+            return;
+        });
     }
 }
 exports.PropertyServices = PropertyServices;

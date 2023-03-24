@@ -13,4 +13,6 @@ router.post('/', isAuthenticated_1.isAuthenticated, uploadImage_1.default.array(
 router.put('/:id', isAuthenticated_1.isAuthenticated, uploadImage_1.default.array('images'), propertiesController.update);
 router.get('/', isAuthenticated_1.isAuthenticated, propertiesController.findMany);
 router.get('/:id', isAuthenticated_1.isAuthenticated, propertiesController.findById);
+router.delete('/:id', isAuthenticated_1.isAuthenticated, propertiesController.deleteById);
+router.delete('/', isAuthenticated_1.isAuthenticated, propertiesController.deleteAll);
 exports.default = router;

@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const multer_1 = __importDefault(require("multer"));
 const node_path_1 = __importDefault(require("node:path"));
-const imageRegex = /\.(jpg|png)$/;
+const imageRegex = /\.(jpg|png|jfif)$/;
 const imageStorage = multer_1.default.diskStorage({
     destination: function (req, file, cb) {
         let folder = "";
@@ -25,7 +25,7 @@ const imageUpload = (0, multer_1.default)({
     storage: imageStorage,
     fileFilter(req, file, cb) {
         if (!file.originalname.match(imageRegex)) {
-            return cb(new Error('Por favor, envie apenas arquivos de png ou jpg!'));
+            return cb(new Error('Por favor, envie apenas arquivos de png, jfif ou jpg!'));
         }
         cb(null, true);
     }
