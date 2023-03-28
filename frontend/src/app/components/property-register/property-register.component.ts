@@ -47,6 +47,7 @@ export class PropertyRegisterComponent implements OnInit {
         next: (response => {
           this.dialogService.show(dialogConfig);
 
+          this.propertyService.sendingProperty.next(false);
           this.router.navigate(['home/dashboard']);
 
           console.log(response);

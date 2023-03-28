@@ -32,6 +32,7 @@ export class UserEditComponent implements OnInit {
             timer: 2000
           });
 
+          this.userService.sendingUser.next(false);
           this.router.navigate(['/home']);
 
           console.log(response);

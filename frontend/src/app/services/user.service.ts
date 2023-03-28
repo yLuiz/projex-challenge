@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { from, Observable, of } from 'rxjs';
+import { BehaviorSubject, from, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IUserRequest, IUserResponse } from 'src/interfaces/user.interface';
 import { AuthService } from './auth.service';
@@ -9,6 +9,8 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class UserService {
+
+  sendingUser = new BehaviorSubject(false);
 
   constructor(
     private http: HttpClient,

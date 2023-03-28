@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
 import { IUserRequest, IUserResponse } from 'src/interfaces/user.interface';
 import { DialogService, TypeDialog } from '../dialog/dialog.service';
 
@@ -19,9 +20,11 @@ export class UserFormComponent implements OnInit {
 
   userForm!: FormGroup;
   matchedPassword = true;
+  loading = false;
 
   constructor(
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private userService: UserService
   ) { }
 
   submit() {
@@ -60,16 +63,9 @@ export class UserFormComponent implements OnInit {
       return;
     }
 
-    const userEmit: IUserRequest = {
-      email: this.email!.value,
-      name: this.name!.value,
-      password: this.password!.value
-    }
-
-    // console.log(userEmit);
+    this.userService.sendingUser.next(true);
 
     this.onSubmit.emit(this.userForm.value);
-    // this.onSubmit.subscribe(user => console.log(user));
   }
 
   get password() {
@@ -102,6 +98,10 @@ export class UserFormComponent implements OnInit {
       ]),
       confirmedPassword: new FormControl("", [Validators.required])
     });
+    this.userService.sendingUser.subscribe({
+      next: sendingUser => this.loading = sendingUser
+    })
   }
+
 
 }

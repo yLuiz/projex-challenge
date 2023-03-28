@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { PropertyService } from 'src/app/services/property.service';
 import { IPropertyForm, IPropertyRequest, IPropertyResponse } from 'src/interfaces/property.interface';
 import { DialogService, TypeDialog } from '../dialog/dialog.service';
 
@@ -18,9 +19,11 @@ export class PropertyFormComponent implements OnInit {
 
   selectedImages: string[] = [];
   propertyForm!: FormGroup;
+  loading = false;
 
   constructor(
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private propertyService: PropertyService
   ) { }
 
   onSelectedStatus(event: Event) {
@@ -84,6 +87,7 @@ export class PropertyFormComponent implements OnInit {
       return;
     }
 
+    this.propertyService.sendingProperty.next(true);
     this.onSubmit.emit(this.propertyForm.value);
   }
 
@@ -121,6 +125,12 @@ export class PropertyFormComponent implements OnInit {
       images: new FormControl(this.property ? this.property.images : ""),
       status: new FormControl(this.property ? this.property.propertyStatusId : "1")
     });
+
+    this.propertyService.sendingProperty.subscribe({
+      next: sendingProperty => {
+        this.loading = sendingProperty;
+      }
+    })
   }
 
 }

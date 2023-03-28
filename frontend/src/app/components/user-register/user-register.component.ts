@@ -28,6 +28,7 @@ export class UserRegisterComponent implements OnInit {
               if (response.token) {
                 localStorage.setItem('token', response.token);
     
+                this.userService.sendingUser.next(false);
                 this.router.navigate(['/home']);
               }
             }

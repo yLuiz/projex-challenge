@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IPropertyRequest, IPropertyResponse } from 'src/interfaces/property.interface';
 
@@ -7,6 +8,8 @@ import { IPropertyRequest, IPropertyResponse } from 'src/interfaces/property.int
   providedIn: 'root'
 })
 export class PropertyService {
+
+  sendingProperty = new BehaviorSubject(false);
 
   constructor(
     private http: HttpClient

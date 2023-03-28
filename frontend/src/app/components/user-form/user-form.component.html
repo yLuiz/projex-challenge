@@ -46,7 +46,10 @@
       </span>
     </div>
   
-    <input type="submit" value="{{buttonText}}">
+    <button type="submit">
+      <span *ngIf="!loading">{{buttonText}}</span>
+      <span *ngIf="loading" class="loader"></span>
+    </button>
   
   </form>
 </section>

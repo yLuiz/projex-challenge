@@ -12,7 +12,7 @@
     width: 100%;
   
     max-height: 800px;
-    height: 100%;
+    padding: 50px 0;
 
     margin: 90px auto 0;
   
@@ -48,6 +48,10 @@
         }
       }
     
+    }
+
+    button[type="submit"] {
+      display: flex;
     }
 
     .form-group {
@@ -111,4 +115,12 @@
       box-shadow: none;
     }
   
+  }
+
+  .loader {
+    width: 28px !important;
+    height: 28px !important;
+  }
+  .loader::before , .loader::after {
+    border: 3px solid #FFF !important;
   }

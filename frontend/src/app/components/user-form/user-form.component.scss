@@ -10,9 +10,9 @@
   border-radius: 6px;
   max-width: 580px;
   width: 100%;
+  padding: 50px 0;
 
   max-height: 800px;
-  height: 100%;
 
   margin: 90px auto 0;
 
@@ -72,5 +72,13 @@
   @media(max-width: 630px) {
     box-shadow: none;
   }
+}
 
+.loader {
+  width: 28px;
+  height: 28px;
+}
+
+.loader::after, .loader::before {
+  border-width: 3px;
 }
