@@ -2,8 +2,11 @@
   <h1>Dashboard</h1>
 
   <div class="charts-container">
+
+    <span *ngIf="loading" class="loader"></span>
+
     <p-chart *ngIf="properties.length" type="doughnut" [data]="data" [options]="chartOptions" [style]="{'max-width': '400px', 'width': '100%'}"></p-chart>
-    <p *ngIf="!properties.length" >Não há imóveis vendidos ou em estoque.</p>
+    <p *ngIf="!properties.length && !loading" >Não há imóveis vendidos ou em estoque.</p>
   </div>
 
   <div class="dashboard-container">

@@ -18,22 +18,15 @@ export class DashboardComponent implements OnInit {
   totalPercentProfit = 0;
   totalExpense = 0;
   totalSale = 0;
-
-
+  loading: boolean = true;
+  
   data: any;
-
   chartOptions: any;
-
-  subscription!: Subscription;
-
-  // config: AppConfig;
-
 
 
   constructor(
     private propertyService: PropertyService,
     private router: Router,
-    // private configService: AppConfigService
   ) { }
 
   environment = environment;
@@ -44,7 +37,6 @@ export class DashboardComponent implements OnInit {
   goToBuyout() {}
 
   ngOnInit(): void {
-
 
     this.propertyService.getAll().subscribe({
       next: (response) => {
@@ -64,7 +56,7 @@ export class DashboardComponent implements OnInit {
             this.totalProfit += Number(property.propertyProfit);
           }
 
-
+          this.loading = false;
         })
         
         this.data = {
