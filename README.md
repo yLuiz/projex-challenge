@@ -28,7 +28,7 @@ Para instalar, basta clonar o repositório e rodar o comando:
 # Inicialização
 Após concluir a instalação, você deve rodar o seguinte comando para iniciar o projeto:
 ``` bash
- npm run dev
+ npm run start
 ```
 
 ## SOBRE O DESAFIO:
